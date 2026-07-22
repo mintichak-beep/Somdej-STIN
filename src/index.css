@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-[#F4F1EA] text-[#1A1A1A] font-sans h-full overflow-hidden;
+  }
+  html {
+    @apply h-full;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
