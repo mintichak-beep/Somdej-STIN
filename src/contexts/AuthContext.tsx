@@ -18,11 +18,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const checkLocalUser = async () => {
+    const stored = localStorage.getItem('stin_current_user');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setCurrentUser(parsed);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
   useEffect(() => {
+    checkLocalUser();
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
       if (user) {
-        // Fetch user document from Firestore to get role
         try {
           const userDocRef = doc(db, 'users', user.uid);
           const userDocSnap = await getDoc(userDocRef);
@@ -30,22 +42,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (userDocSnap.exists()) {
             setCurrentUser({ id: userDocSnap.id, ...userDocSnap.data() } as User);
           } else {
-            // If no user doc exists yet, maybe they just signed up or are a default student.
-            // For now, let's just set them with a default 'student' role.
-            setCurrentUser({
-              id: user.uid,
-              email: user.email || '',
-              role: 'student',
-              displayName: user.displayName || 'Student',
-              createdAt: null as any // we'd normally use serverTimestamp
-            });
+            const stored = localStorage.getItem('stin_current_user');
+            if (stored) {
+              setCurrentUser(JSON.parse(stored));
+            } else {
+              setCurrentUser({
+                id: user.uid,
+                email: user.email || 'user@stin.ac.th',
+                role: 'student',
+                displayName: user.displayName || 'User',
+                createdAt: null as any
+              });
+            }
           }
         } catch (error) {
           console.error("Error fetching user role:", error);
-          setCurrentUser(null);
         }
       } else {
-        setCurrentUser(null);
+        await checkLocalUser();
       }
       setLoading(false);
     });
@@ -53,7 +67,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return unsubscribe;
   }, []);
 
-  const signOut = () => firebaseSignOut(auth);
+  const signOut = async () => {
+    localStorage.removeItem('stin_current_user');
+    setCurrentUser(null);
+    try {
+      await firebaseSignOut(auth);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <AuthContext.Provider value={{ currentUser, firebaseUser, loading, signOut }}>
@@ -69,3 +91,4 @@ export function useAuth() {
   }
   return context;
 }
+

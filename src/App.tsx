@@ -8,7 +8,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { AppLayout } from './components/layout/AppLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { WelcomePage } from './pages/WelcomePage';
 import { Login } from './pages/Login';
+import { InstructorLogin } from './pages/InstructorLogin';
+import { StudentLogin } from './pages/StudentLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { CourseDirectory } from './pages/admin/CourseDirectory';
 import { ProjectDirectory } from './pages/admin/ProjectDirectory';
@@ -25,8 +28,13 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/login" element={<WelcomePage />} />
+          <Route path="/login/instructor" element={<InstructorLogin />} />
+          <Route path="/login/student" element={<StudentLogin />} />
+          <Route path="/login/admin" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+
 
           {/* Admin Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

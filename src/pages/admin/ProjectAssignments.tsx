@@ -48,7 +48,15 @@ export function ProjectAssignments() {
           getDocs(query(collection(db, 'students'), where('groupId', '==', groupRef)))
         );
         const studentSnaps = await Promise.all(studentPromises);
-        allStudents = studentSnaps.flatMap(snap => snap.docs.map(d => ({ id: d.id, ...d.data() } as Student)));
+        allStudents = studentSnaps.flatMap(snap => snap.docs.map(d => {
+          const data = d.data();
+          return {
+            id: d.id,
+            ...data,
+            name: data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim() || data.studentId || 'Student',
+            studentId: data.studentId || ''
+          } as unknown as Student;
+        }));
       }
       setStudents(allStudents);
 
@@ -134,8 +142,8 @@ export function ProjectAssignments() {
   };
 
   const filteredStudents = students.filter(s => 
-    s.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    s.studentId.toLowerCase().includes(searchQuery.toLowerCase())
+    (s.name || '').toLowerCase().includes((searchQuery || '').toLowerCase()) || 
+    (s.studentId || '').toLowerCase().includes((searchQuery || '').toLowerCase())
   );
 
   if (loading) {
