@@ -20,7 +20,7 @@ export function AdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-none">
         {[
           { title: 'Total Users', value: '1,234', desc: 'Auth & Profiles' },
-          { title: 'Active Courses', value: '24', desc: 'Subject Meta' },
+          { title: 'Active Clinical Courses', value: '24', desc: 'Clinical Course Meta' },
           { title: 'Practice Sites', value: '15', desc: 'Clinical Locations' },
           { title: 'System Health', value: '99.9%', desc: 'Performance Index' },
         ].map((stat, idx) => (

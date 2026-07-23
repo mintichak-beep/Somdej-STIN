@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, GraduationCap, UserCheck, ArrowRight, Stethoscope, Sparkles, LogIn } from 'lucide-react';
+import { GraduationCap, UserCheck, ArrowRight, Stethoscope, Lock, Zap, Target, LogIn, Shield } from 'lucide-react';
 import { DEMO_MODE } from '../lib/config';
 
 export function WelcomePage() {
@@ -12,7 +12,7 @@ export function WelcomePage() {
         id: `demo-${role}-id`,
         email: `${role}@stin.ac.th`,
         role: role,
-        displayName: role === 'admin' ? 'System Administrator' : role === 'instructor' ? 'Dr. Somchai Instructor' : 'Student Nursing (65123456)',
+        displayName: role === 'admin' ? 'System Administrator' : role === 'instructor' ? 'Dr. Somchai Instructor' : 'Student Nursing (65000001)',
         createdAt: new Date()
       };
       localStorage.setItem('stin_current_user', JSON.stringify(demoUser));
@@ -21,140 +21,171 @@ export function WelcomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F6F0] text-[#111111] font-sans flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative background accent */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#C8102E]/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#111111]/5 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
+    <div className="min-h-screen bg-[#E3F2FD] text-[#1E293B] font-sans flex flex-col justify-between py-8 px-4 sm:px-8 lg:px-12 relative overflow-hidden">
+      {/* Decorative background accents matching reference */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-red-400/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
 
-      {/* Top Bar with LOGIN Button */}
-      <div className="max-w-5xl mx-auto w-full flex justify-end z-10 mb-4">
+      {/* Top Header with Logo & Login */}
+      <div className="max-w-7xl mx-auto w-full flex items-center justify-between z-10 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-[#E53935] rounded-2xl flex items-center justify-center text-white shadow-md">
+            <span className="text-2xl font-bold">+</span>
+          </div>
+          <div>
+            <h2 className="font-extrabold text-gray-900 text-lg tracking-tight">STIN-Somdej Connect</h2>
+            <p className="text-xs text-gray-600 font-semibold">Student Nursing Practice Coordination System</p>
+          </div>
+        </div>
+
         <button
           onClick={() => navigate('/login')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#111111] hover:bg-[#C8102E] text-white rounded-xl text-xs uppercase tracking-widest font-bold shadow-md transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 hover:bg-[#E53935] text-white rounded-2xl text-xs uppercase tracking-wider font-bold shadow-md transition-all hover:scale-105"
         >
           <LogIn className="w-4 h-4" />
-          <span>LOGIN</span>
+          <span>Login Portal</span>
         </button>
       </div>
 
-      <div className="max-w-4xl mx-auto w-full pt-4 pb-8 z-10 text-center">
-        <div className="inline-flex items-center justify-center p-3.5 bg-white border border-[#111111]/10 rounded-2xl mb-6 shadow-sm">
-          <Stethoscope className="w-8 h-8 text-[#C8102E]" />
-        </div>
-        <h1 className="text-4xl sm:text-6xl font-serif italic tracking-tight text-[#111111] mb-4">
-          STIN Connect
-        </h1>
-        <p className="text-xs uppercase tracking-widest font-bold text-[#111111]/60 max-w-lg mx-auto">
-          Educational Management System & Clinical Practice Portal
-        </p>
+      {/* Main Hero & Content Section */}
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10 my-auto py-6">
+        {/* Left Column: Titles & Role Selection */}
+        <div className="lg:col-span-7 flex flex-col justify-center">
+          <div className="mb-8">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-3">
+              ระบบประสานงานแหล่งฝึก<br />
+              <span className="text-[#E53935]">รพ.สมเด็จพระบรมราชเทวี ณ ศรีราชา</span>
+            </h1>
+            <p className="text-sm sm:text-base text-gray-700 font-semibold">
+              ระบบบริหารจัดการฝึกปฏิบัติการพยาบาลสำหรับอาจารย์และนักศึกษา
+            </p>
+          </div>
 
-        {/* Enter System Large Button */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={() => handleSelectRole('admin', '/admin')}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#C8102E] hover:bg-[#C8102E]/90 text-white rounded-2xl text-xs uppercase tracking-widest font-bold shadow-xl shadow-[#C8102E]/20 transition-all hover:scale-105"
-          >
-            <Sparkles className="w-5 h-5" />
-            <span>ENTER SYSTEM</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => navigate('/login')}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white border border-[#111111]/20 hover:border-[#C8102E] text-[#111111] rounded-2xl text-xs uppercase tracking-widest font-bold shadow-sm transition-all hover:scale-105"
-          >
-            <LogIn className="w-4 h-4 text-[#C8102E]" />
-            <span>LOGIN PAGE</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          <div className="mb-5 flex items-center gap-2">
+            <div className="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-[#E53935]">
+              <GraduationCap className="w-4 h-4" />
+            </div>
+            <h3 className="text-xs uppercase tracking-wider font-bold text-gray-800">Choose Your Role</h3>
+          </div>
+
+          {/* Role Cards Grid matching reference */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl">
+            {/* Teacher / Instructor Card */}
+            <div className="bg-white border border-gray-100 hover:border-red-300 p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center mb-4 text-[#E53935] group-hover:scale-105 transition-transform mx-auto shadow-inner">
+                  <GraduationCap className="w-10 h-10" />
+                </div>
+                <h4 className="text-lg font-bold text-gray-900 text-center mb-1">Instructor</h4>
+                <p className="text-xs text-gray-500 text-center mb-6">
+                  For instructors and administrators
+                </p>
+              </div>
+              <div className="space-y-2">
+                <button
+                  onClick={() => handleSelectRole('instructor', '/instructor')}
+                  className="w-full py-3.5 bg-[#E53935] hover:bg-[#C8102E] text-white rounded-2xl text-xs uppercase tracking-widest font-bold shadow-md transition-all flex items-center justify-center gap-2 group-hover:scale-105"
+                >
+                  <span>Continue</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleSelectRole('admin', '/admin')}
+                  className="w-full py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl text-[11px] font-semibold transition-all text-center"
+                >
+                  Admin Mode ⚙️
+                </button>
+              </div>
+            </div>
+
+            {/* Student Card */}
+            <div className="bg-white border border-gray-100 hover:border-red-300 p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-4 text-blue-600 group-hover:scale-105 transition-transform mx-auto shadow-inner">
+                  <UserCheck className="w-10 h-10" />
+                </div>
+                <h4 className="text-lg font-bold text-gray-900 text-center mb-1">Student</h4>
+                <p className="text-xs text-gray-500 text-center mb-6">
+                  For nursing students
+                </p>
+              </div>
+              <div>
+                <button
+                  onClick={() => handleSelectRole('student', '/student')}
+                  className="w-full py-3.5 bg-[#E53935] hover:bg-[#C8102E] text-white rounded-2xl text-xs uppercase tracking-widest font-bold shadow-md transition-all flex items-center justify-center gap-2 group-hover:scale-105"
+                >
+                  <span>Continue</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Medical Clinical Graphic Illustration Representation matching the mockup */}
+        <div className="lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative">
+          <div className="w-full max-w-md bg-white/90 backdrop-blur-md border border-white p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+            {/* Clipboard Header Graphic */}
+            <div className="absolute top-4 right-4 w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-[#E53935]">
+              <Stethoscope className="w-6 h-6" />
+            </div>
+
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-[#E53935] rounded-xl flex items-center justify-center text-white font-bold text-lg">+</div>
+              <div>
+                <div className="w-32 h-4 bg-gray-900/10 rounded-full mb-1"></div>
+                <div className="w-20 h-3 bg-gray-900/10 rounded-full"></div>
+              </div>
+            </div>
+
+            {/* Simulated Medical Lines on Clipboard */}
+            <div className="space-y-3 mb-6">
+              <div className="w-full h-3.5 bg-[#E53935]/20 rounded-full"></div>
+              <div className="w-5/6 h-3.5 bg-gray-200 rounded-full"></div>
+              <div className="w-4/6 h-3.5 bg-gray-200 rounded-full"></div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+              <div className="flex items-center gap-3 p-3 bg-red-50/80 rounded-2xl">
+                <div className="w-8 h-8 bg-[#E53935] text-white rounded-xl flex items-center justify-center font-bold text-xs"> ward </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-800">Somdej Hospital</p>
+                  <p className="text-[10px] text-gray-500">Clinical Units</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-3 bg-blue-50/80 rounded-2xl">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-xs"> STIN </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-800">Nursing Portal</p>
+                  <p className="text-[10px] text-gray-500">Live Coordination</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto w-full z-10 my-auto py-6">
-        <div className="text-center mb-6">
-          <h2 className="text-xs uppercase tracking-widest font-bold text-[#111111]/40">
-            Or select a demo portal direct entry
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Administrator Card */}
-          <div 
-            onClick={() => handleSelectRole('admin', '/admin')}
-            className="group cursor-pointer bg-white border border-[#111111]/10 hover:border-[#C8102E] p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#111111] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div>
-              <div className="w-12 h-12 bg-[#111111]/5 rounded-xl flex items-center justify-center mb-4 text-[#111111] group-hover:scale-110 group-hover:bg-[#C8102E] group-hover:text-white transition-all">
-                <Shield className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#111111] mb-2">Administrator</h3>
-              <p className="text-xs text-[#111111]/60 mb-6 leading-relaxed">
-                Manage courses, practice projects, student assignments, faculty, welcome settings, and institutional reports.
-              </p>
-              <div className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#111111] group-hover:text-[#C8102E] gap-2">
-                <span>Open Dashboard</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-
-          {/* Instructor Card */}
-          <div 
-            onClick={() => handleSelectRole('instructor', '/instructor')}
-            className="group cursor-pointer bg-white border border-[#111111]/10 hover:border-[#C8102E] p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C8102E] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div>
-              <div className="w-12 h-12 bg-[#C8102E]/10 rounded-xl flex items-center justify-center mb-4 text-[#C8102E] group-hover:scale-110 group-hover:bg-[#C8102E] group-hover:text-white transition-all">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#111111] mb-2">Instructor</h3>
-              <p className="text-xs text-[#111111]/60 mb-6 leading-relaxed">
-                Access assigned clinical practice projects, student lists, timetables, practice sites, accommodation, and grading.
-              </p>
-              <div className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#C8102E] gap-2">
-                <span>Open Dashboard</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-
-          {/* Student Card */}
-          <div 
-            onClick={() => handleSelectRole('student', '/student')}
-            className="group cursor-pointer bg-white border border-[#111111]/10 hover:border-[#C8102E] p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#111111] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div>
-              <div className="w-12 h-12 bg-[#111111]/5 rounded-xl flex items-center justify-center mb-4 text-[#111111] group-hover:scale-110 group-hover:bg-[#C8102E] group-hover:text-white transition-all">
-                <UserCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#111111] mb-2">Student</h3>
-              <p className="text-xs text-[#111111]/60 mb-6 leading-relaxed">
-                View personal timetable, clinical ward/unit rotations, instructor notes, van transportation, and invoices.
-              </p>
-              <div className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#111111] group-hover:text-[#C8102E] gap-2">
-                <span>Open Dashboard</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto w-full text-center z-10 pt-4 border-t border-[#111111]/10 flex flex-col sm:flex-row justify-between items-center text-xs text-[#111111]/50 gap-2">
-        <span>© {new Date().getFullYear()} STIN Connect. All rights reserved.</span>
-        <div className="flex items-center gap-4">
-          <span className="bg-[#C8102E]/10 text-[#C8102E] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-            Demo Mode Active
+      {/* Footer matching reference */}
+      <div className="max-w-7xl mx-auto w-full text-center z-10 pt-6 border-t border-blue-200/80 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-600 gap-4">
+        <span>© {new Date().getFullYear()} STIN-Somdej Connect. All rights reserved.</span>
+        
+        <div className="flex items-center gap-6 font-semibold">
+          <span className="flex items-center gap-1.5 text-gray-800">
+            <Lock className="w-3.5 h-3.5 text-[#E53935]" /> Secure
           </span>
-          <button 
-            onClick={() => navigate('/login')}
-            className="hover:text-[#C8102E] transition-colors underline uppercase tracking-widest font-bold"
-          >
-            Login Portal
-          </button>
+          <span>•</span>
+          <span className="flex items-center gap-1.5 text-gray-800">
+            <Zap className="w-3.5 h-3.5 text-amber-500" /> Reliable
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1.5 text-gray-800">
+            <Target className="w-3.5 h-3.5 text-blue-600" /> Efficient
+          </span>
         </div>
+
+        <span className="bg-red-50 text-[#E53935] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-red-200">
+          Demo Mode Active
+        </span>
       </div>
     </div>
   );

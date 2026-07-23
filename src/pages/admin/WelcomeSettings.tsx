@@ -137,10 +137,10 @@ export function WelcomeSettingsManager() {
             {activeTab === 'media' && (
               <div className="space-y-6">
                 {[
-                  { id: 'hospitalLogo', label: 'Hospital Logo' },
+                  { id: 'hospitalLogo', label: 'Practice Site Logo' },
                   { id: 'universityLogo', label: 'University Logo' },
                   { id: 'welcomeBackground', label: 'Background Image' },
-                  { id: 'teacherIllustration', label: 'Teacher Illustration' },
+                  { id: 'teacherIllustration', label: 'Instructor Illustration' },
                   { id: 'studentIllustration', label: 'Student Illustration' },
                 ].map(field => (
                   <div key={field.id} className="space-y-2">
@@ -271,7 +271,7 @@ export function WelcomeSettingsManager() {
 
                   {settings.enableCarousel && (
                     <div className="mt-8 flex gap-4">
-                      {settings.teacherIllustration && <img src={settings.teacherIllustration} className="w-24 h-24 rounded-full object-cover border-4 border-white/20" alt="Teacher" />}
+                      {settings.teacherIllustration && <img src={settings.teacherIllustration} className="w-24 h-24 rounded-full object-cover border-4 border-white/20" alt="Instructor" />}
                       {settings.studentIllustration && <img src={settings.studentIllustration} className="w-24 h-24 rounded-full object-cover border-4 border-white/20" alt="Student" />}
                     </div>
                   )}

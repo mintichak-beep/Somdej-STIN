@@ -41,8 +41,8 @@ export function ProjectDirectory() {
   return (
     <div className="flex flex-col h-full space-y-8">
       <div>
-        <h2 className="text-4xl md:text-5xl font-serif italic mb-2 tracking-tighter text-[#1A1A1A]">Practice Projects</h2>
-        <p className="text-sm text-[#1A1A1A]/60 max-w-md">Overview of all active clinical practice projects synced from the course directory.</p>
+        <h2 className="text-4xl md:text-5xl font-serif italic mb-2 tracking-tighter text-[#1A1A1A]">Clinical Practice Projects</h2>
+        <p className="text-sm text-[#1A1A1A]/60 max-w-md">Overview of all active clinical practice projects synced from the clinical course directory.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -52,7 +52,7 @@ export function ProjectDirectory() {
           </div>
         ) : projects.length === 0 ? (
           <div className="col-span-full p-10 text-center border border-[#1A1A1A]/10 bg-white">
-            <p className="text-sm text-[#1A1A1A]/40 italic font-serif">No practice projects found.</p>
+            <p className="text-sm text-[#1A1A1A]/40 italic font-serif">No clinical practice projects found.</p>
           </div>
         ) : (
           projects.map(project => (
@@ -71,7 +71,7 @@ export function ProjectDirectory() {
                     {project.status}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-[#1B365D] mb-2">{project.course?.name || 'Unknown Course'}</h3>
+                <h3 className="text-xl font-bold text-[#1B365D] mb-2">{project.course?.name || 'Unknown Clinical Course'}</h3>
                 <p className="text-sm text-[#1A1A1A]/60 line-clamp-2 mb-4">{project.course?.description}</p>
                 
                 <div className="space-y-2 mt-auto">

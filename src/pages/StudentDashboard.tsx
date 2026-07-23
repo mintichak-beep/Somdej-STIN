@@ -106,7 +106,7 @@ export function StudentDashboard() {
       <div className="flex-1 bg-white border border-[#1A1A1A]/10 flex flex-col">
         <div className="p-4 border-b border-[#1A1A1A]/10 bg-[#F4F1EA]">
           <h3 className="text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60 flex items-center gap-2">
-            <Calendar className="w-4 h-4" /> My Clinical Timetable
+            <Calendar className="w-4 h-4" /> My Timetable
           </h3>
         </div>
         <div className="flex-1 overflow-auto">
@@ -123,7 +123,7 @@ export function StudentDashboard() {
               <thead>
                 <tr className="border-b border-[#1A1A1A]/10 bg-white">
                   <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Date</th>
-                  <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Course</th>
+                  <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Clinical Course</th>
                   <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Location</th>
                   <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Shift</th>
                   <th className="p-4 text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60">Status</th>

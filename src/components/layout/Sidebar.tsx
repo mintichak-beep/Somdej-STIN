@@ -22,25 +22,26 @@ export function Sidebar() {
     switch (role) {
       case 'admin':
         return [
-          { to: '/admin', label: 'Dashboard', icon: Home },
-          { to: '/admin/users', label: 'Users', icon: Users },
-          { to: '/admin/courses', label: 'Courses', icon: BookOpen },
-          { to: '/admin/sites', label: 'Practice Sites', icon: MapPin },
-          { to: '/admin/welcome-settings', label: 'Welcome Page', icon: Settings },
-          { to: '/admin/settings', label: 'Settings', icon: Settings },
+          {to: '/admin', label: 'Dashboard', icon: Home},
+          {to: '/admin/users', label: 'Users', icon: Users},
+          {to: '/admin/academic-years', label: 'Academic Year', icon: Calendar},
+          {to: '/admin/courses', label: 'Clinical Course', icon: BookOpen},
+          {to: '/admin/sites', label: 'Practice Site', icon: MapPin},
+          {to: '/admin/welcome-settings', label: 'Welcome Settings', icon: Settings},
+          {to: '/admin/settings', label: 'Settings', icon: Settings},
         ];
       case 'instructor':
         return [
           { to: '/instructor', label: 'Dashboard', icon: Home },
-          { to: '/instructor/projects', label: 'Practice Projects', icon: Calendar },
-          { to: '/instructor/students', label: 'My Students', icon: Users },
+          { to: '/instructor/projects', label: 'Clinical Practice Projects', icon: Calendar },
+          { to: '/instructor/students', label: 'Students', icon: Users },
           { to: '/instructor/assignments', label: 'Assignments', icon: FileText },
         ];
       case 'student':
       default:
         return [
           { to: '/student', label: 'Dashboard', icon: Home },
-          { to: '/student/projects', label: 'My Projects', icon: Calendar },
+          { to: '/student/projects', label: 'Clinical Practice Projects', icon: Calendar },
           { to: '/student/assignments', label: 'Assignments', icon: FileText },
           { to: '/student/transportation', label: 'Transportation', icon: Bus },
         ];

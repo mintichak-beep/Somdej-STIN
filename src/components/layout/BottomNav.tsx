@@ -14,20 +14,20 @@ export function BottomNav() {
       case 'admin':
         return [
           { to: '/admin', label: 'Home', icon: Home },
-          { to: '/admin/courses', label: 'Courses', icon: FileText },
+          { to: '/admin/courses', label: 'Clinical Course', icon: FileText },
           { to: '/admin/settings', label: 'Menu', icon: Menu },
         ];
       case 'instructor':
         return [
           { to: '/instructor', label: 'Home', icon: Home },
-          { to: '/instructor/projects', label: 'Projects', icon: Calendar },
+          { to: '/instructor/projects', label: 'Clinical Practice Projects', icon: Calendar },
           { to: '/instructor/students', label: 'Menu', icon: Menu },
         ];
       case 'student':
       default:
         return [
           { to: '/student', label: 'Home', icon: Home },
-          { to: '/student/projects', label: 'Projects', icon: Calendar },
+          { to: '/student/projects', label: 'Clinical Practice Projects', icon: Calendar },
           { to: '/student/assignments', label: 'Menu', icon: Menu },
         ];
     }

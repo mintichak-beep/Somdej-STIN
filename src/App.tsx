@@ -14,6 +14,9 @@ import { InstructorLogin } from './pages/InstructorLogin';
 import { StudentLogin } from './pages/StudentLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { CourseDirectory } from './pages/admin/CourseDirectory';
+import { CourseWorkspace } from './pages/admin/CourseWorkspace';
+import { AcademicYearDirectory } from './pages/admin/AcademicYearDirectory';
+import { AcademicYearDetails } from './pages/admin/AcademicYearDetails';
 import { ProjectDirectory } from './pages/admin/ProjectDirectory';
 import { ProjectDetails } from './pages/admin/ProjectDetails';
 import { ProjectAssignments } from './pages/admin/ProjectAssignments';
@@ -40,7 +43,10 @@ export default function App() {
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route element={<AppLayout />}>
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/academic-years" element={<AcademicYearDirectory />} />
+              <Route path="/admin/academic-years/:id" element={<AcademicYearDetails />} />
               <Route path="/admin/courses" element={<CourseDirectory />} />
+              <Route path="/admin/courses/:id" element={<CourseWorkspace />} />
               <Route path="/admin/projects" element={<ProjectDirectory />} />
               <Route path="/admin/projects/:id" element={<ProjectDetails />} />
               <Route path="/admin/projects/:id/assignments" element={<ProjectAssignments />} />

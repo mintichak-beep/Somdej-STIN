@@ -10,6 +10,26 @@ export interface User {
   createdAt: Timestamp;
 }
 
+export interface Semester {
+  id: string;
+  academicYearId: string;
+  semesterNumber: number;
+  semesterName: string;
+  startDate: string;
+  endDate: string;
+  status: 'active' | 'inactive' | 'archived';
+  createdAt?: Timestamp;
+}
+
+export interface AcademicYear {
+  id: string;
+  year: string; // e.g., '2568'
+  status: 'active' | 'inactive' | 'archived';
+  description?: string;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
+}
+
 export interface Student {
   id: string;
   userId: DocumentReference; // reference to users
@@ -33,11 +53,14 @@ export interface Course {
   id: string;
   code: string;
   name: string;
+  credits: number;
   description: string;
   academicYear: number;
   semester: number;
   practiceHours: number;
   practicePeriod: string;
+  practiceStartDate?: string;
+  practiceEndDate?: string;
   studentGroups: DocumentReference[]; // reference to studentGroups
   practiceSites: DocumentReference[]; // reference to practiceSites
   status: 'active' | 'archived';
@@ -51,12 +74,24 @@ export interface PracticeSite {
   location: string;
   contactPerson: string;
   contactNumber: string;
+  address?: string;
+  phone?: string;
+  status?: string;
+  capacity?: number;
 }
 
 export interface StudentGroup {
   id: string;
   name: string;
-  year: number;
+  courseId: DocumentReference; // reference to courses
+  practiceSiteId: DocumentReference | null; // reference to practiceSites
+  studentIds: DocumentReference[]; // array of references to students
+  primaryInstructorId: DocumentReference | null; // reference to teachers
+  secondaryInstructorId: DocumentReference | null; // reference to teachers
+  practicePeriod?: string;
+  status: 'active' | 'archived';
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
 }
 
 export interface PracticeProject {
@@ -82,6 +117,7 @@ export interface StudentAssignment {
   practiceNotes?: string;
   primaryInstructorId?: DocumentReference;
   secondaryInstructorId?: DocumentReference;
+  siteId?: DocumentReference; // reference to practiceSites
 }
 
 export interface TeacherAssignment {
@@ -98,12 +134,38 @@ export interface Room {
   capacity: number;
 }
 
+export interface Vehicle {
+  id: string;
+  name: string;
+  registrationNumber: string;
+  driverName: string;
+  driverPhone?: string;
+  capacity: number;
+}
+
+export interface Route {
+  id: string;
+  name: string;
+  pickupPoint: string;
+  stops: string[];
+  destination: string;
+}
+
 export interface Transportation {
   id: string;
   projectId: DocumentReference; // reference to practiceProjects
-  driverName: string;
-  vehicleNumber: string;
-  departureTime: Timestamp;
+  courseId: DocumentReference; // reference to courses
+  vehicleId: DocumentReference; // reference to vehicles
+  routeId: DocumentReference; // reference to routes
+  siteId: DocumentReference; // reference to practiceSites
+  pickupPoint: string;
+  destination: string;
+  travelDate: Timestamp;
+  departureTime: string;
+  returnTime: string;
+  passengerIds: DocumentReference[]; // references to students
+  instructorIds: DocumentReference[]; // references to teachers
+  status: 'scheduled' | 'departed' | 'completed' | 'cancelled' | 'archived';
 }
 
 export interface WelcomeSettings {
@@ -128,6 +190,18 @@ export interface Payment {
   amount: number;
   status: string;
   date: Timestamp;
+}
+
+export interface Accommodation {
+  id: string;
+  projectId: DocumentReference; // reference to practiceProjects
+  studentId: DocumentReference; // reference to students
+  roomId: DocumentReference; // reference to rooms
+  checkInDate: Timestamp;
+  checkOutDate: Timestamp;
+  waterCharge: number;
+  notes?: string;
+  status: 'active' | 'archived';
 }
 
 export interface Report {
